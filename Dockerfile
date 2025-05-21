@@ -6,8 +6,8 @@ COPY package*.json ./
 RUN npm ci --omit=dev
 RUN npm i prisma 
 
-COPY prisma/ ./prisma/
-RUN npx prisma generate --schema ./prisma/schema/
+# COPY prisma/ ./prisma/
+# RUN npx prisma generate --schema ./prisma/schema/
 
 # Install system packages (for Playwright or headless browsers)
 RUN apt-get -y update
