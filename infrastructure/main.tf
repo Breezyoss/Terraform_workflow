@@ -1,7 +1,7 @@
 provider "docker" {}
 
 resource "docker_image" "app_image" {
-  name = "ghcr.io/Breezyoss/Terraform_workflow:dev"
+  name = "ghcr.io/Breezyoss/terraform_workflow:dev"
 }
 
 resource "docker_container" "app_container" {
