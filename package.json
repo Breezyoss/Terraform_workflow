@@ -10,7 +10,8 @@
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"build-image:dev": "docker build -t ghcr.io/breezyoss/terraform_workflow:dev ."
+		"build-image:dev": "docker build -t ghcr.io/breezyoss/terraform_workflow:dev .",
+		"main": "index.js"
 	},
 	"devDependencies": {
 		"@fontsource/fira-mono": "^5.0.0",

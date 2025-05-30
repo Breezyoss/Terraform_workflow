@@ -32,4 +32,4 @@ ENV PORT=3000
 
 EXPOSE 3002
 
-CMD [ "node", "." ]
+CMD [ "node", "index.js" ]
