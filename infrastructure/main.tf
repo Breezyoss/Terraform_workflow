@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    docker = {
+      source  = "kreuzwerker/docker"
+      version = "~> 3.0"
+    }
+  }
+}
+
 provider "docker" {}
 
 resource "docker_image" "app_image" {
@@ -12,4 +21,5 @@ resource "docker_container" "app_container" {
     internal = 3000
     external = 80
   }
+  rm = false
 }

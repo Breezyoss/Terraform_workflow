@@ -16,7 +16,7 @@ RUN apt-get install -y gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libc
 
 # 🛠️ Build the app here
 # RUN npm run build
-# COPY . .
+COPY . .
 
 
 ENV PUBLIC_URL="example.com"
