@@ -1,26 +1,27 @@
 # ---- Stage 1: The "Builder" ----
-# We use a full Node image here because we need build tools and system libraries (for Prisma/Playwright)
+# We use a full Node image here because we need build tools.
 FROM node:20 AS builder
 
 WORKDIR /usr/src/app
 
-# (Optional but recommended) Install Playwright system dependencies if you run tests here
-# RUN apt-get update && apt-get install -y --no-install-recommends libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libgtk-3-0 libgbm1 libasound2
-
-# Copy package manifests and install ALL dependencies (including dev)
+# Copy package manifests
 COPY package*.json ./
+
+# 🚨 CRITICAL FIX HERE 🚨
+# Use `npm install` or `npm ci` WITHOUT any flags that omit dev dependencies.
+# This ensures that @sveltejs/adapter-node and other build tools are installed.
 RUN npm install
 
-# Copy the rest of the application source code
+# Now, copy the rest of your application's source code
 COPY . .
 
-# Generate the Prisma Client (if you are using it)
-# It needs to be generated before the build
-RUN npx prisma generate
+# (Optional) Generate Prisma Client if needed
+# RUN npx prisma generate
 
-# Run the SvelteKit build. This now has access to devDependencies and the source code.
+# Run the SvelteKit build. This will now succeed because the adapter is present.
 RUN npm run build
 
+# ... the rest of your builder stage ...
 # Prune devDependencies to prepare for the production copy.
 # This makes the node_modules copy in the next stage smaller.
 RUN npm prune --omit=dev
